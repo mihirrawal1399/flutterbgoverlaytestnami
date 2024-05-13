@@ -1,7 +1,10 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../../main.dart';
+import '../verification_cubit.dart';
 
 class ScanningView extends StatefulWidget {
   const ScanningView({super.key});
@@ -11,47 +14,77 @@ class ScanningView extends StatefulWidget {
 }
 
 class _ScanningViewState extends State<ScanningView> {
+  late VerificationCubit _verificationCubit;
   late CameraController _cameraController;
 
   @override
   void initState() {
     super.initState();
-    _cameraController = CameraController(cameras[0], ResolutionPreset.low);
-    _cameraController.initialize().then((_) {
-      if (!mounted) {
-        return;
-      }
-      setState(() {});
-    }).catchError((Object e) {
-      if (e is CameraException) {
-        debugPrint(e.description);
-        switch (e.code) {
-          case 'CameraAccessDenied':
-            // Handle access errors here.
-            break;
-          default:
-            // Handle other errors here.
-            break;
-        }
-      }
-    });
+    _verificationCubit = context.read<VerificationCubit>();
+    _verificationCubit.initializeCamera();
+    _cameraController = _verificationCubit.cameraController;
   }
 
   @override
   void dispose() {
-    _cameraController.dispose();
+    _verificationCubit.disposeCamera();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    final loadingPercentage = context
+        .select((VerificationCubit value) => value.state.loadingPercentage);
     return Column(
       children: [
         if (_cameraController.value.isInitialized) ...[
-          CameraPreview(
-            _cameraController,
-            child: Column(
-              children: [],
+          Expanded(
+            child: CameraPreview(
+              _cameraController,
+              child: Column(
+                children: [
+                  const SizedBox(height: 32),
+                  Text(
+                    'Please look into the camera and hold still',
+                    style: GoogleFonts.montserrat(
+                      textStyle: const TextStyle(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 12.0,
+                        color: Color(0xFF1A0A02),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 48),
+                  Image.asset(
+                    'assets/verify2.png',
+                    // height: MediaQuery.of(context).size.height * 0.45,
+                    width: MediaQuery.of(context).size.width * 0.8,
+                  ),
+                  const Spacer(),
+                  const Spacer(),
+                  Text(
+                    '$loadingPercentage% Scanning',
+                    style: GoogleFonts.montserrat(
+                      textStyle: const TextStyle(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 12.0,
+                        color: Color(0xFF1A0A02),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 32),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: LinearProgressIndicator(
+                      color: const Color(0xFF5F69C7),
+                      value: loadingPercentage.toDouble() / 100,
+                      borderRadius: BorderRadius.circular(10),
+                      minHeight: 10,
+                    ),
+                  ),
+                  const Spacer(),
+                ],
+              ),
             ),
           ),
         ] else ...[

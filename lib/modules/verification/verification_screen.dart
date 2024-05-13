@@ -4,6 +4,7 @@ import 'package:flutterbgoverlaytestnami/modules/verification/widgets/first_time
 import 'package:google_fonts/google_fonts.dart';
 
 import 'verification_cubit.dart';
+import 'widgets/dim_err_screen.dart';
 import 'widgets/scanning_view.dart';
 
 class VerificationScreen extends StatelessWidget {
@@ -48,9 +49,15 @@ class VerificationBody extends StatelessWidget {
       child: (tryCount == 0 &&
               (loadingPercentage == 0 || loadingPercentage == 100))
           ? const FirstTimeView()
-          : (loadingPercentage > 0 || loadingPercentage < 100) 
-          ? const ScanningView()
-           :const SizedBox.square(),
+          : (loadingPercentage > 0 || loadingPercentage < 100)
+              ? const ScanningView()
+              : ((tryCount == 1 &&
+                      (loadingPercentage == 0 || loadingPercentage == 100)))
+                  ? const DimErrScreen()
+                  : ((tryCount == 2 &&
+                          (loadingPercentage == 0 || loadingPercentage == 100)))
+                      ? Container() //
+                      : const SizedBox.square(),
     );
   }
 }
