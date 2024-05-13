@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutterbgoverlaytestnami/modules/home/home_screen.dart';
 import 'package:flutterbgoverlaytestnami/modules/verification/verification_screen.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setEnabledSystemUIMode(
+    SystemUiMode.manual,
+    overlays: [],
+  );
   runApp(const MyApp());
 }
 
