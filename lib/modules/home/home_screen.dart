@@ -19,15 +19,16 @@ class HomeScreen extends StatelessWidget {
             backgroundColor: const Color(0xFF5F69C7),
           ),
           child: Container(
-            width: double.infinity,
+            height: MediaQuery.of(context).size.height * 0.055,
+            width: MediaQuery.of(context).size.width * 0.8,
             alignment: Alignment.center,
-            padding: const EdgeInsets.all(16.0),
             child: Text(
-              'Font',
+              'Verify',
               style: GoogleFonts.encodeSansExpanded(
                 textStyle: const TextStyle(
                   fontWeight: FontWeight.w500,
                   fontSize: 16.0,
+                  color: Colors.white,
                 ),
               ),
             ),
