@@ -1,7 +1,5 @@
 // verification_state.dart
-
-import 'dart:typed_data';
-
+import 'package:camera/camera.dart';
 import 'package:equatable/equatable.dart';
 
 class VerificationState extends Equatable {
@@ -9,7 +7,7 @@ class VerificationState extends Equatable {
   final bool isLightError;
   final bool isVerified;
   final int tryCount;
-  final Uint8List? snapshot;
+  final XFile? snapshot;
 
   const VerificationState({
     this.loadingPercentage = 0,
@@ -24,7 +22,7 @@ class VerificationState extends Equatable {
     bool? isLightError,
     bool? isVerified,
     int? tryCount,
-    Uint8List? snapshot,
+    XFile? snapshot,
   }) {
     return VerificationState(
       loadingPercentage: loadingPercentage ?? this.loadingPercentage,

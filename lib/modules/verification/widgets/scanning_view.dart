@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../main.dart';
 import '../verification_cubit.dart';
 
 class ScanningView extends StatefulWidget {
@@ -21,15 +20,15 @@ class _ScanningViewState extends State<ScanningView> {
   void initState() {
     super.initState();
     _verificationCubit = context.read<VerificationCubit>();
-    _verificationCubit.initializeCamera();
+    // _verificationCubit.initializeCamera();
     _cameraController = _verificationCubit.cameraController;
   }
 
-  @override
-  void dispose() {
-    _verificationCubit.disposeCamera();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   _verificationCubit.disposeCamera();
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {

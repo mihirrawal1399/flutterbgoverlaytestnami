@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterbgoverlaytestnami/modules/home/home_screen.dart';
 import 'package:flutterbgoverlaytestnami/modules/verification/verification_screen.dart';
+
+import 'modules/verification/verification_cubit.dart';
 
 // ignore: unused_element
 // late List<CameraDescription> cameras;
@@ -20,18 +23,21 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Nami Test',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+    return BlocProvider(
+      create: (context) => VerificationCubit(),
+      child: MaterialApp(
+        title: 'Nami Test',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          useMaterial3: true,
+        ),
+        initialRoute: '/home',
+        routes: {
+          '/home': (context) => const HomeScreen(),
+          '/verify': (context) => const VerificationScreen(),
+        },
       ),
-      initialRoute: '/home',
-      routes: {
-        '/home': (context) => const HomeScreen(),
-        '/verify': (context) => const VerificationScreen(),
-      },
     );
   }
 }
