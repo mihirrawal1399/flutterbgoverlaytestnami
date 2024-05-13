@@ -6,6 +6,7 @@ class VerificationState extends Equatable {
   final int loadingPercentage;
   final bool isLightError;
   final bool isVerified;
+  final bool isSuccess;
   final int tryCount;
   final XFile? snapshot;
 
@@ -13,6 +14,7 @@ class VerificationState extends Equatable {
     this.loadingPercentage = 0,
     this.isLightError = false,
     this.isVerified = false,
+    this.isSuccess = false,
     this.tryCount = 0,
     this.snapshot,
   });
@@ -23,6 +25,7 @@ class VerificationState extends Equatable {
     bool? isVerified,
     int? tryCount,
     XFile? snapshot,
+    bool? isSuccess,
   }) {
     return VerificationState(
       loadingPercentage: loadingPercentage ?? this.loadingPercentage,
@@ -30,6 +33,7 @@ class VerificationState extends Equatable {
       isVerified: isVerified ?? this.isVerified,
       tryCount: tryCount ?? this.tryCount,
       snapshot: snapshot ?? this.snapshot,
+      isSuccess: isSuccess ?? this.isSuccess,
     );
   }
 
@@ -40,5 +44,6 @@ class VerificationState extends Equatable {
         isVerified,
         tryCount,
         snapshot,
+        isSuccess,
       ];
 }

@@ -1,13 +1,12 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../verification_cubit.dart';
 
-class Fail1Screen extends StatelessWidget {
-  const Fail1Screen({super.key});
+class Fail2Screen extends StatelessWidget {
+  const Fail2Screen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -46,43 +45,32 @@ class Fail1Screen extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 28),
-        ElevatedButton(
-          onPressed: () {
-            context.read<VerificationCubit>().simulateLoading();
-          },
-          style: ElevatedButton.styleFrom(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12.0),
-              side: const BorderSide(
-                color: Color(0xFF5F69C7),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 32),
+          child: Text(
+            'Don’t Worry, your request for Attendance has been sent to the Head for approval!',
+            textAlign: TextAlign.center,
+            style: GoogleFonts.montserrat(
+              textStyle: const TextStyle(
+                fontWeight: FontWeight.w400,
+                fontSize: 12.0,
+                color: Color(0xFF1A0A02),
               ),
             ),
-            backgroundColor: Colors.white,
           ),
-          child: Container(
-            height: MediaQuery.of(context).size.height * 0.055,
-            width: MediaQuery.of(context).size.width * 0.4,
-            alignment: Alignment.center,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Icon(
-                  Icons.replay,
-                  color: Color(0xFF5F69C7),
-                  size: 16,
-                ),
-                const SizedBox(width: 4),
-                Text(
-                  'Re-Take',
-                  style: GoogleFonts.encodeSansExpanded(
-                    textStyle: const TextStyle(
-                      fontWeight: FontWeight.w500,
-                      fontSize: 16.0,
-                      color: Color(0xFF5F69C7),
-                    ),
-                  ),
-                ),
-              ],
+        ),
+        const SizedBox(height: 28),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 32),
+          child: Text(
+            'Go to Dashboard and continue with your tasks for the day once your attendance is approved.',
+            textAlign: TextAlign.center,
+            style: GoogleFonts.montserrat(
+              textStyle: const TextStyle(
+                fontWeight: FontWeight.w500,
+                fontSize: 10.0,
+                color: Color(0xFF1A0A02),
+              ),
             ),
           ),
         ),
@@ -92,19 +80,21 @@ class Fail1Screen extends StatelessWidget {
           thickness: 1.5,
         ),
         ElevatedButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
           style: ElevatedButton.styleFrom(
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12.0),
             ),
-            backgroundColor: const Color(0xFFBFBFBF),
+            backgroundColor: const Color(0xFF5F69C7),
           ),
           child: Container(
             height: MediaQuery.of(context).size.height * 0.055,
             width: MediaQuery.of(context).size.width * 0.8,
             alignment: Alignment.center,
             child: Text(
-              'Verify',
+              'Go to Dashboard',
               style: GoogleFonts.encodeSansExpanded(
                 textStyle: const TextStyle(
                   fontWeight: FontWeight.w500,

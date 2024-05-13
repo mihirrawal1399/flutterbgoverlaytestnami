@@ -22,7 +22,7 @@ class DimErrScreen extends StatelessWidget {
                 File(snapshot!.path),
                 fit: BoxFit.cover,
               )
-            : const Center(child: Text('Captured image issue')),
+            : const Center(child: CircularProgressIndicator()),
         Positioned(
           top: 32,
           child: Text(
@@ -93,7 +93,7 @@ class DimErrScreen extends StatelessWidget {
                   ),
                   const SizedBox(width: 4),
                   Text(
-                    'Verify',
+                    'Re-Take',
                     style: GoogleFonts.encodeSansExpanded(
                       textStyle: const TextStyle(
                         fontWeight: FontWeight.w500,

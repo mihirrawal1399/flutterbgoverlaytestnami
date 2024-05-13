@@ -34,6 +34,10 @@ class VerificationCubit extends Cubit<VerificationState> {
     await cameraController.dispose();
   }
 
+  void toggleSuccess(bool isSuccess) {
+    emit(state.copyWith(isSuccess: isSuccess, tryCount: 0));
+  }
+
   Future<void> takeSnapshot() async {
     try {
       final XFile imageFile = await cameraController.takePicture();
